@@ -6,20 +6,6 @@
         "writer":{
           "output":"stderr"
         }
-      },
-      "access":{
-        "level":"DEBUG",
-        "writer":{
-          "output":"file",
-          "filename":"./logs/access.log"
-        },
-        "encoder":{
-          "format":"formatted",
-          "template":"{common_log} \"{request>headers>Referer>[0]}\" \"{request>headers>User-Agent>[0]}\""
-        },
-        "include":[
-          "http.log.access.access"
-        ]
       }
     }
   },
@@ -60,6 +46,16 @@
               ]
             }
           ],
+		  "tls_connection_policies": [
+            {
+              "match": {
+                "sni": ["*"]
+              },
+              "certificate_selection": {
+				"any_tag": ["default"]
+			  }
+            }
+          ],
           "logs":{
             "default_logger_name":"access"
           }
@@ -70,8 +66,9 @@
       "certificates":{
         "load_files":[
           {
-            "certificate":"cert.crt",
-            "key":"cert.key"
+            "certificate":"caddy.crt",
+            "key":"caddy.key",
+			"tags": ["default"]
           }
         ]
       }
