@@ -28,12 +28,7 @@
                 }
               ],
               "handle":[
-                {
-                  "handler":"static_response",
-                  "status_code":"200",
-                  "body":"Hello World!"
-                },
-                {
+			    {
                   "handler":"headers",
                   "response":{
                     "set":{
@@ -42,6 +37,11 @@
                       ]
                     }
                   }
+                },
+                {
+                  "handler":"static_response",
+                  "status_code":"200",
+                  "body":"Hello World!"
                 }
               ]
             }
